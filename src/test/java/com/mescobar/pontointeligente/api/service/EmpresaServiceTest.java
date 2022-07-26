@@ -29,8 +29,8 @@ public class EmpresaServiceTest {
 	
 	@BeforeEach
 	public void setUp() throws Exception{
-		BDDMockito.given(this.empresaRepository.findByCnpj(Mockito.anyString())).willReturn(new Empresa());
-		BDDMockito.given(this.empresaRepository.save(Mockito.any(Empresa.class))).willReturn(new Empresa());
+		BDDMockito.given(this.empresaRepository.findByCnpj(Mockito.anyString())).willReturn(Empresa.builder().build());
+		BDDMockito.given(this.empresaRepository.save(Mockito.any(Empresa.class))).willReturn(Empresa.builder().build());
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class EmpresaServiceTest {
 	
 	@Test
 	public void testPersistirEmpresa() {
-		Empresa empresa = this.empresaService.persistir(new Empresa());
+		Empresa empresa = this.empresaService.persistir( Empresa.builder().build());
 
 		Assertions.assertNotNull(empresa);
 	}

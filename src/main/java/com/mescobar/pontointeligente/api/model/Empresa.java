@@ -15,8 +15,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Entity
 @Table(name = "empresa")
 @Data

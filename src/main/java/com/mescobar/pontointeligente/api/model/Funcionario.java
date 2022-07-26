@@ -24,9 +24,11 @@ import javax.persistence.Transient;
 
 import com.mescobar.pontointeligente.api.model.enums.PerfilEnum;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 @Entity
 @Table(name = "funcionario")
 public class Funcionario implements Serializable{
@@ -55,6 +57,10 @@ public class Funcionario implements Serializable{
 	
 	@Column(name = "qtde_horas_trabalho_dia", nullable = true)
 	private Float qtdeHorasTrabalhoDia;
+	
+
+	@Column(name = "qtde_horas_almoco", nullable = true)
+	private Float qtdeHorasAlmoco;
 	
 	@Enumerated(EnumType.STRING)
 	private PerfilEnum perfil;

@@ -74,20 +74,18 @@ public class LancamentoRepositoryTest {
 	}
 
 	private Funcionario obterDadosFuncionario(Empresa empresa) {
-		Funcionario funcionario = new Funcionario();
-		funcionario.setNome("Fulano de Tal");
-		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
-		funcionario.setSenha("123456");
-		funcionario.setCpf("24291173474");
-		funcionario.setEmail("email@email.com");
-		funcionario.setEmpresa(empresa);
-		return funcionario;
+		return Funcionario.builder()
+				.nome("Fulano de Tal")
+				.perfil(PerfilEnum.ROLE_USUARIO)
+				.senha("123456")
+				.cpf("24291173474")
+				.email("email@email.com")
+				.empresa(empresa)
+				.build();
+
 	}
 
 	private Empresa obterDadosEmpresa() {
-		Empresa empresa = new Empresa();
-		empresa.setRazaoSocial("Empresa de exemplo");
-		empresa.setCnpj("51463645000100");
-		return empresa;
+		return Empresa.builder().razaoSocial("Empresa de exemplo").cnpj("51463645000100").build();
 	}
 }

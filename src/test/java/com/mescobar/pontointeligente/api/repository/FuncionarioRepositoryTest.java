@@ -1,10 +1,8 @@
 package com.mescobar.pontointeligente.api.repository;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,24 +18,24 @@ public class FuncionarioRepositoryTest {
 
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
-	
+
 	@Autowired
 	private EmpresaRepository empresaRepository;
-	
+
 	private static final String EMAIL = "email|@email.com";
 	private static final String CPF = "21212332322";
-	
+
 	@BeforeAll
 	public void setUp() {
 		Empresa empresa = this.empresaRepository.save(obterDadosEmpresa());
 		this.funcionarioRepository.save(obterDadosFuncionario(empresa));
 	}
-	
+
 	@AfterAll
 	public final void tearDown() {
 		this.empresaRepository.deleteAll();
 	}
-	
+
 	@Test
 	public void testBuscarFuncionarioPoEmail() {
 		Funcionario funcionario = this.funcionarioRepository.findByEmail(EMAIL);
@@ -51,14 +49,14 @@ public class FuncionarioRepositoryTest {
 
 		Assertions.assertEquals(CPF, funcionario.getCpf());
 	}
-	
+
 	@Test
 	public void testBuscarFuncionarioPorEmailECpf() {
 		Funcionario funcionario = this.funcionarioRepository.findByCpfOrEmail(CPF, EMAIL);
-		
+
 		Assertions.assertNotNull(funcionario);
 	}
-	
+
 	@Test
 	public void testBuscarFuncionarioPorEmailOuCpfParaEmailInvalido() {
 		Funcionario funcionario = this.funcionarioRepository.findByCpfOrEmail(CPF, "email@invalido.com");
@@ -72,22 +70,13 @@ public class FuncionarioRepositoryTest {
 
 		Assertions.assertNotNull(funcionario);
 	}
-	
+
 	private Funcionario obterDadosFuncionario(Empresa empresa) {
-		Funcionario funcionario = new Funcionario();
-		funcionario.setNome("Jose da silva");
-		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
-		funcionario.setSenha("");
-		funcionario.setCpf(CPF);
-		funcionario.setEmail(EMAIL);
-		
-		return funcionario;
+		return Funcionario.builder().nome("Jose da silva").perfil(PerfilEnum.ROLE_USUARIO).senha("").cpf(CPF)
+				.email(EMAIL).build();
 	}
-	
+
 	private Empresa obterDadosEmpresa() {
-		Empresa empresa = new Empresa();
-		empresa.setRazaoSocial("Empresa de exemplo");
-		empresa.setCnpj("51463645000100");
-		return empresa;
+		return Empresa.builder().razaoSocial("Empresa de exemplo").cnpj("51463645000100").build();
 	}
 }

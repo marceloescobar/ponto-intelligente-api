@@ -21,10 +21,7 @@ public class EmpresaRepositoryTest {
 	
 	@BeforeEach
 	public void setUp() throws Exception{
-		Empresa empresa = new Empresa();
-		empresa.setRazaoSocial("Empresa de exemplo");
-		empresa.setCnpj(CNPJ);
-		
+		Empresa empresa = Empresa.builder().razaoSocial("Empresa de exemplo").cnpj(CNPJ).build();
 		this.empresaRepository.save(empresa);
 	}
 	

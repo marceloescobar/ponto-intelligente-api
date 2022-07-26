@@ -29,16 +29,16 @@ public class FuncionarioServiceTest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		BDDMockito.given(this.funcionarioRepository.save(Mockito.any(Funcionario.class))).willReturn(new Funcionario());
+		BDDMockito.given(this.funcionarioRepository.save(Mockito.any(Funcionario.class))).willReturn(novoFuncionario());
 		BDDMockito.given(this.funcionarioRepository.findById(Mockito.anyLong()))
-				.willReturn(Optional.of(new Funcionario()));
-		BDDMockito.given(this.funcionarioRepository.findByEmail(Mockito.anyString())).willReturn(new Funcionario());
-		BDDMockito.given(this.funcionarioRepository.findByCpf(Mockito.anyString())).willReturn(new Funcionario());
+				.willReturn(Optional.of(novoFuncionario()));
+		BDDMockito.given(this.funcionarioRepository.findByEmail(Mockito.anyString())).willReturn(novoFuncionario());
+		BDDMockito.given(this.funcionarioRepository.findByCpf(Mockito.anyString())).willReturn(novoFuncionario());
 	}
 
 	@Test
 	public void testPersistirFuncionario() {
-		Funcionario funcionario = this.funcionarioService.persistir(new Funcionario());
+		Funcionario funcionario = this.funcionarioService.persistir(novoFuncionario());
 
 		assertNotNull(funcionario);
 	}
@@ -62,6 +62,10 @@ public class FuncionarioServiceTest {
 		Optional<Funcionario> funcionario = this.funcionarioService.buscarPorCpf("24291173474");
 
 		assertTrue(funcionario.isPresent());
+	}
+	
+	private Funcionario novoFuncionario() {
+		return Funcionario.builder().build();
 	}
 
 }
