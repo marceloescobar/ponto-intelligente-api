@@ -2,6 +2,8 @@ package com.mescobar.pontointeligente.api.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -27,12 +29,14 @@ public class LancamentoServiceImpl implements LancamentoService {
 	}
 
 	@Override
+	@Cacheable("lancamentoPorId")
 	public Optional<Lancamento> buscarPorId(Long id) {
 		log.info("buscando lancamentos por ID {}", id);
 		return this.lancamentoRepository.findById(id);
 	}
 
 	@Override
+	@CachePut("lancamentoPorId")
 	public Lancamento persistir(Lancamento lancamento) {
 		log.info("persistindo o lancamento {}", lancamento);
 		return this.lancamentoRepository.save(lancamento);

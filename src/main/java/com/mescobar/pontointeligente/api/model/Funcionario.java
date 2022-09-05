@@ -47,6 +47,8 @@ public class Funcionario implements Serializable{
 	
 	@Column(name = "email", nullable = false)
 	private String email;
+	
+	@Column(name = "senha", nullable = false)
 	private String senha;
 	
 	@Column(name = "cpf", nullable = false)
@@ -65,7 +67,10 @@ public class Funcionario implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private PerfilEnum perfil;
 	
+	@Column(name = "data_criacao", nullable = false)
 	private Date dataCriacao;
+	
+	@Column(name = "data_atualizacao", nullable = false)
 	private Date dataAtualizacao;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -90,5 +95,15 @@ public class Funcionario implements Serializable{
 	@Transient
 	public Optional<BigDecimal> getValorHoraOpt() {
 		return Optional.ofNullable(valorHora);
+	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasTrabalhoDiaOpt() {
+		return Optional.ofNullable(qtdeHorasTrabalhoDia);
+	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasAlmocoOpt() {
+		return Optional.ofNullable(qtdeHorasAlmoco);
 	}
 }

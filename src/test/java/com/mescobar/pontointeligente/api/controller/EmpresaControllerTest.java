@@ -39,6 +39,7 @@ public class EmpresaControllerTest {
 	private EmpresaService empresaService;
 
 	@Test
+	@WithMockUser
 	public void testBuscarEmpresaCnpjInvalido() throws Exception {
 		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
 		
